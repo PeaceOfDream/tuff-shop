@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getCategories } from '../../features/categories/categoriesSlice'
@@ -15,7 +14,7 @@ export const App = () => {
 		dispatch(getCategories())
 		dispatch(getProducts());
 
-		axios.delete('https://api.escuelajs.co/api/v1/categories/8');
+
 
 	}, [dispatch])
 

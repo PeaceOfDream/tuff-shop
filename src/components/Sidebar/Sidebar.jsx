@@ -8,7 +8,7 @@ export const Sidebar = () => {
 
 	const {list} = useSelector(({categories}) => categories)
 
-	console.log(list);
+
 
   return (
     <section className={styles.sidebar}>
