@@ -8,6 +8,8 @@ export const Sidebar = () => {
 
 	const {list} = useSelector(({categories}) => categories)
 
+	console.log(list);
+
   return (
     <section className={styles.sidebar}>
       <div className={styles.title}>CATEGORIES</div>
@@ -17,7 +19,8 @@ export const Sidebar = () => {
             <li key={id}>
               <NavLink 
 				 	className={({isActive}) => `${styles.link} ${isActive ? styles.active : ''}`} 
-				  to={`/categories/${id}`}>{name}</NavLink>
+				  to={`/categories/${id}`}>{name}
+				  </NavLink>
             </li>
           ))}
         </ul>
