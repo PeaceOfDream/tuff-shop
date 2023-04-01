@@ -40,35 +40,44 @@ export const UserSignUpForm = ({ toggleCurrentFormType, closeForm }) => {
         <div className={styles.group}>
           <input
             type="email"
-            name="email"
             placeholder="Your email"
+            name="email"
             value={values.email}
             autoComplete="off"
             onChange={handleChange}
             required
           />
+        </div>
+
+        <div className={styles.group}>
           <input
             type="name"
-            name="name"
             placeholder="Your name"
+            name="name"
             value={values.name}
             autoComplete="off"
             onChange={handleChange}
             required
           />
+        </div>
+
+        <div className={styles.group}>
           <input
             type="password"
-            name="password"
             placeholder="Your password"
+            name="password"
             value={values.password}
             autoComplete="off"
             onChange={handleChange}
             required
           />
+        </div>
+
+        <div className={styles.group}>
           <input
             type="avatar"
-            name="avatar"
             placeholder="Your avatar"
+            name="avatar"
             value={values.avatar}
             autoComplete="off"
             onChange={handleChange}
@@ -76,7 +85,10 @@ export const UserSignUpForm = ({ toggleCurrentFormType, closeForm }) => {
           />
         </div>
 
-        <div className={styles.link} onClick={() => toggleCurrentFormType('login')}>
+        <div
+          className={styles.link}
+          onClick={() => toggleCurrentFormType('login')}
+        >
           I already have a account
         </div>
         <button className={styles.submit} type="submit">
