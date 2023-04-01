@@ -72,12 +72,15 @@ const userSlice = createSlice({
       if (found) {
         newCart = newCart.map((item) => {
           return item.id === payload.id
-            ? { ...item, quantity: payload || item.quantity + 1 }
+            ? { ...item, quantity: payload.quantity || item.quantity + 1 }
             : item;
         });
       } else newCart.push({ ...payload, quantity: 1 });
       state.cart = newCart;
     },
+	 removeItemFromCart: (state, {payload}) => {
+		state.cart = state.cart.filter(({id}) => id !== payload)
+	 },
     toggleForm: (state, { payload }) => {
       state.showForm = payload;
     },
@@ -94,7 +97,9 @@ const userSlice = createSlice({
   },
 });
 
-export const { addItemToCart, toggleForm, toggleFormType } =
+export const { addItemToCart, toggleForm, removeItemFromCart, toggleFormType } =
   userSlice.actions;
 
 export default userSlice.reducer;
+
+

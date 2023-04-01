@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
@@ -10,18 +10,21 @@ export const Category = () => {
   const { id } = useParams();
   const { list } = useSelector(({ categories }) => categories);
 
-  const defaultValues = {
+  const defaultValues = useMemo(() => ({
     title: '',
     price_min: 0,
     price_max: 0,
-  };
+  }),[]);
 
-  const defaultParams = {
-    categoryId: id,
-    limit: 5,
-    offset: 0,
-    ...defaultValues,
-  };
+  const defaultParams = useMemo(
+    () => ({
+      categoryId: id,
+      limit: 5,
+      offset: 0,
+      ...defaultValues,
+    }),
+    [defaultValues, id],
+  );
 
 
   const [isEnd, setEnd] = useState(false);
@@ -37,11 +40,11 @@ export const Category = () => {
   useEffect(() => {
     if (!id) return;
 
-	 setValues(defaultValues)
-	 setItems([])
-	 setEnd(false)
+    setValues(defaultValues);
+    setItems([]);
+    setEnd(false);
     setParams({ ...defaultParams, categoryId: id });
-  }, [id]);
+  }, [id, defaultParams, defaultValues]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -71,6 +74,12 @@ export const Category = () => {
 	 setEnd(false)
     setParams({ ...defaultParams, ...values });
   };
+
+  const handleReset = () => {
+	setValues(defaultValues)
+	setParams(defaultParams)
+	setEnd(false)
+  }
 
   return (
     <section className={styles.wrapper}>
@@ -112,7 +121,7 @@ export const Category = () => {
       ) : !isSuccess || !items.length ? (
         <div className={styles.back}>
           <span>No results</span>
-          <button>Reset</button>
+          <button onClick={handleReset} >Reset</button>
         </div>
       ) : (
         <Products
